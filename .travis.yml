@@ -6,4 +6,4 @@ before_script:
   - npm install -g phantomjs
   - npm install -g gulp-jasmine-browser
   - npm install -g gulp-uglify
-  - gulp test
+script: gulp test

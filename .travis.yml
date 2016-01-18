@@ -2,8 +2,8 @@ language: node_js
 node_js:
   - "4.1"
 before_script:
-  - npm install -g gulp
-  - npm install -g phantomjs
-  - npm install -g gulp-jasmine-browser
-  - npm install -g gulp-uglify
+  - npm install gulp
+  - npm install phantomjs
+  - npm install gulp-jasmine-browser
+  - npm install gulp-uglify
 script: gulp test

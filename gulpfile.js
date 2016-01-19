@@ -20,7 +20,7 @@ gulp.task('compress', function () {
 });
 
 gulp.task('test', function() {
-  return gulp.src(['lib/*.js', 'spec/*spec.js'])
+  return gulp.src(['source/*.js', 'spec/*spec.js'])
     .pipe(jasmineBrowser.specRunner({console: true}))
     .pipe(jasmineBrowser.headless());
 });

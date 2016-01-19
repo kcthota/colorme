@@ -9,7 +9,7 @@ gulp.task('default', ['lint', 'test', 'compress']);
 gulp.task('travis', ['lint', 'test']);
 
 gulp.task('compress', function () {
-  return gulp.src('lib/*.js')
+  return gulp.src('source/*.js')
 	.pipe(uglify({
         preserveComments: 'license'
     }))

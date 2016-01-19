@@ -1,0 +1,31 @@
+﻿{
+  "name": "colorme",
+  "version": "v1.0",
+  "homepage": "https://github.com/kcthota/colorme",
+  "authors": [
+    "Krishna Chaitanya Thota <kcthota@gmail.com>"
+  ],
+  "description": "Helps convert hex color to RGB and HSL",
+  "main": "source/colorme.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "colorme",
+    "RGB",
+    "HSL",
+    "SASS"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "spec",
+    "gulpfile.js"
+  ]
+}

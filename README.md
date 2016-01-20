@@ -9,13 +9,10 @@ Library to help convert Hex Color Codes to RGB and HSL.
 
 ```
 bower install colorme
-
 ```
 
 ```
-
 <script src="dist/colorme.min.js"></script>
-
 ```
 
 # Examples
@@ -27,6 +24,12 @@ var rgb, hexColor = new colorMe.HexColor('#123456');
 
 rgb = hexColor.getRGB();
 
+rgb.red();
+
+rgb.green();
+
+rgb.blue();
+
 ```
 
 ## Hex Color to HSL
@@ -35,6 +38,12 @@ rgb = hexColor.getRGB();
 var hsl, hexColor = new colorMe.HexColor('#123456');
 
 hsl = hexColor.getHSL();
+
+hsl.hue();
+
+hsl.saturation();
+
+hsl.lightness();
 
 ```
 

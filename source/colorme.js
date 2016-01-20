@@ -8,7 +8,11 @@ License: MIT
     var colorMe = {};
     
     colorMe.HexColor = function (hex) {
-        var sc_parts, parts = [], val = hex.toString();
+        var sc_parts, parts = [],
+            r_part = '00',
+            g_part = '00',
+            b_part = '00',
+            val = hex.toString();
         //check for shortcode - #123 should be #112233
         sc_parts = /^#?([a-f\d])([a-f\d])([a-f\d])$/i.exec(val);
         
@@ -22,25 +26,33 @@ License: MIT
 
         if (parts) {
             parts = parts.splice(1);
-            this.r_part = parts[0];
-            this.g_part = parts[1];
-            this.b_part = parts[2];
-        } else {
-            this.r_part = '00';
-            this.g_part = '00';
-            this.b_part = '00';
+            r_part = parts[0];
+            g_part = parts[1];
+            b_part = parts[2];
         }
+        
+        this.r_part = function () {
+            return r_part;
+        };
+        
+        this.g_part = function () {
+            return g_part;
+        };
+        
+        this.b_part = function () {
+            return b_part;
+        };
     };
     
     colorMe.HexColor.prototype = {
         getRGB: function () {
-            return new colorMe.RGB(parseInt(this.r_part, 16), parseInt(this.g_part, 16), parseInt(this.b_part, 16));
+            return new colorMe.RGB(parseInt(this.r_part(), 16), parseInt(this.g_part(), 16), parseInt(this.b_part(), 16));
         },
         getHSL: function () {
             return this.getRGB().getHSL();
         },
         getValue: function () {
-            return '#' + this.r_part + this.g_part + this.b_part;
+            return '#' + this.r_part() + this.g_part() + this.b_part();
         }
     };
     
@@ -50,9 +62,21 @@ License: MIT
             b_val = parseInt(b, 10) || 0;
         
         //keep r, g, b between 0, 255
-        this.r = Math.max(Math.min(r_val,  255), 0);
-        this.g = Math.max(Math.min(g_val,  255), 0);
-        this.b = Math.max(Math.min(b_val,  255), 0);
+        r_val = Math.max(Math.min(r_val,  255), 0);
+        g_val = Math.max(Math.min(g_val,  255), 0);
+        b_val = Math.max(Math.min(b_val,  255), 0);
+        
+        this.red = function () {
+            return r_val;
+        };
+        
+        this.green = function () {
+            return g_val;
+        };
+        
+        this.blue = function () {
+            return b_val;
+        };
     };
     
     colorMe.RGB.prototype = {
@@ -60,15 +84,15 @@ License: MIT
             
             var values = [];
             values.push('#');
-            values.push(('0' + this.r.toString(16)).slice(-2));
-            values.push(('0' + this.g.toString(16)).slice(-2));
-            values.push(('0' + this.b.toString(16)).slice(-2));
+            values.push(('0' + this.red().toString(16)).slice(-2));
+            values.push(('0' + this.green().toString(16)).slice(-2));
+            values.push(('0' + this.blue().toString(16)).slice(-2));
             return values.join('').toUpperCase();
         },
         getHSL: function () {
-            var rForOne = this.r / 255,
-                gForOne = this.g / 255,
-                bForOne = this.b / 255,
+            var rForOne = this.red() / 255,
+                gForOne = this.green() / 255,
+                bForOne = this.blue() / 255,
                 max_color = Math.max(rForOne, gForOne, bForOne),
                 min_color = Math.min(rForOne, gForOne, bForOne),
                 l = (max_color + min_color) / 2,
@@ -102,20 +126,33 @@ License: MIT
             s_val = parseFloat(s) || 0,
             l_val = parseFloat(l) || 0;
         if (h_val >= 360) {
-            this.h = h_val % 360;
+            h_val = h_val % 360;
         } else if (h_val < 0) {
-            this.h = h_val + 360 * Math.ceil((h_val * -1) / 360);
-        } else {
-            this.h = h_val;
+            h_val = h_val + 360 * Math.ceil((h_val * -1) / 360);
         }
         
-        this.s = Math.max(Math.min(s_val, 1), 0);
-        this.l = Math.max(Math.min(l_val, 1), 0);
+        s_val = Math.max(Math.min(s_val, 1), 0);
+        l_val = Math.max(Math.min(l_val, 1), 0);
+        
+        this.hue = function () {
+            return h_val;
+        };
+        
+        this.saturation = function () {
+            return s_val;
+        };
+        
+        this.lightness = function () {
+            return l_val;
+        };
     };
     
     colorMe.HSL.prototype = {
         getRGB: function () {
-            var r, g, b, t1, t2, h_val, r1, g1, b1,
+            var r, g, b, t1, t2, r1, g1, b1,
+                h_val = this.hue() / 360,
+                s_val = this.saturation(),
+                l_val = this.lightness(),
                 hue2rgb = function (t1, t2, h) {
                     var color;
                     if (6 * h < 1) {
@@ -143,17 +180,16 @@ License: MIT
                     return val;
                 };
             
-            if (this.s === 0) {
-                r = g = b = this.l * 255;
+            if (s_val === 0) {
+                r = g = b = l_val * 255;
             } else {
-                if (this.l < 0.5) {
-                    t1 = this.l * (1.0 + this.s);
+                if (l_val < 0.5) {
+                    t1 = l_val * (1.0 + s_val);
                 } else {
-                    t1 = this.l + this.s - this.l * this.s;
+                    t1 = l_val + s_val - l_val * s_val;
                 }
                 
-                t2 = 2 * this.l - t1;
-                h_val = this.h / 360;
+                t2 = 2 * l_val - t1;
                 
                 r1 = correctColor(h_val + 0.333);
                 g1 = correctColor(h_val);

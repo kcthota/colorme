@@ -1,7 +1,22 @@
-emoji4j
+colorme
 =============
 
+[![Build Status](https://img.shields.io/travis/kcthota/colorme/master.svg)](https://travis-ci.org/kcthota/colorme)
+
 Library to help convert Hex Color Codes to RGB and HSL.
+
+# Usage
+
+```
+bower install colorme
+
+```
+
+```
+
+<script src="dist/colorme.min.js"></script>
+
+```
 
 # Examples
 
@@ -58,7 +73,12 @@ var rgb, hsl = new colorMe.HSL(250, 0.20, 0.8);
 rgb = hsl.getRGB();
 
 ```
+# License
 
-References:
+MIT License
+
+Copyright 2016 Krishna Chaitanya Thota.
+
+#References:
 
 http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/

@@ -24,11 +24,11 @@ var rgb, hexColor = new colorMe.HexColor('#123456');
 
 rgb = hexColor.getRGB();
 
-rgb.red();
+rgb.red(); //18
 
-rgb.green();
+rgb.green(); //52
 
-rgb.blue();
+rgb.blue(); //86
 
 ```
 
@@ -39,11 +39,11 @@ var hsl, hexColor = new colorMe.HexColor('#123456');
 
 hsl = hexColor.getHSL();
 
-hsl.hue();
+hsl.hue(); //210
 
-hsl.saturation();
+hsl.saturation(); //0.65
 
-hsl.lightness();
+hsl.lightness(); //0.20
 
 ```
 
@@ -52,7 +52,7 @@ hsl.lightness();
 ```
 var hex, rgb = new colorMe.RGB(150, 150, 150);
 
-hex = rgb.getHex();
+hex = rgb.getHex(); //#969696
 
 ```
 
@@ -61,7 +61,7 @@ hex = rgb.getHex();
 ```
 var hsl, rgb = new colorMe.RGB(12, 233, 120);
 
-hsl = rgb.getHSL();
+hsl = rgb.getHSL(); //return colorMe.HSL object
 
 ```
 
@@ -70,7 +70,7 @@ hsl = rgb.getHSL();
 ```
 var hex, hsl = new colorMe.HSL(0, 0, 0);
 
-hex = hsl.getHex();
+hex = hsl.getHex(); //#000000
         
 ```
 
@@ -79,7 +79,7 @@ hex = hsl.getHex();
 ```
 var rgb, hsl = new colorMe.HSL(250, 0.20, 0.8);
 
-rgb = hsl.getRGB();
+rgb = hsl.getRGB(); //returns colorMe.RGB object
 
 ```
 # License

@@ -236,4 +236,21 @@ describe("ColorTests", function () {
         expect(rgb.blue()).toBe(51);
     });
   
+    it("RGB object change colors", function() {
+        var rgb, hex = new colorMe.HexColor('000');
+        rgb = hex.getRGB();
+        rgb.red(255).green(255).blue(255);
+        expect(rgb.red()).toBe(255);
+        expect(rgb.green()).toBe(255);
+        expect(rgb.blue()).toBe(255);
+    });
+    
+    it("HSL object change colors", function() {
+        var hsl, hex = new colorMe.HexColor('#7DE87D');
+        hsl = hex.getHSL();
+        hsl.hue(0).saturation(0).lightness(0.4);
+        expect(hsl.hue()).toBe(0);
+        expect(hsl.saturation()).toBe(0);
+        expect(hsl.lightness()).toBe(0.4);
+    });
 });

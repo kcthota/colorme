@@ -57,26 +57,38 @@ License: MIT
     };
     
     colorMe.RGB = function (r, g, b) {
-        var r_val = parseInt(r, 10) || 0,
-            g_val = parseInt(g, 10) || 0,
-            b_val = parseInt(b, 10) || 0;
+        var r_val, g_val, b_val,
+            correctValue = function (val) {
+                return Math.max(Math.min((parseInt(val, 10) || 0),  255), 0);
+            };
         
-        //keep r, g, b between 0, 255
-        r_val = Math.max(Math.min(r_val,  255), 0);
-        g_val = Math.max(Math.min(g_val,  255), 0);
-        b_val = Math.max(Math.min(b_val,  255), 0);
-        
-        this.red = function () {
+        this.red = function (val) {
+            if (typeof val !== 'undefined') {
+                r_val = correctValue(val);
+                return this;
+            }
             return r_val;
         };
         
-        this.green = function () {
+        this.green = function (val) {
+            if (typeof val !== 'undefined') {
+                g_val = correctValue(val);
+                return this;
+            }
             return g_val;
         };
         
-        this.blue = function () {
+        this.blue = function (val) {
+            if (typeof val !== 'undefined') {
+                b_val = correctValue(val);
+                return this;
+            }
             return b_val;
         };
+        
+        this.red(r);
+        this.green(g);
+        this.blue(b);
     };
     
     colorMe.RGB.prototype = {
@@ -122,29 +134,50 @@ License: MIT
     };
     
     colorMe.HSL = function (h, s, l) {
-        var h_val = Math.round(h) || 0,
-            s_val = parseFloat(s) || 0,
-            l_val = parseFloat(l) || 0;
-        if (h_val >= 360) {
-            h_val = h_val % 360;
-        } else if (h_val < 0) {
-            h_val = h_val + 360 * Math.ceil((h_val * -1) / 360);
-        }
+        var h_val, s_val, l_val,
+            correctHue = function (val) {
+                var hue = Math.round(val) || 0;
+                if (hue >= 360) {
+                    hue = hue % 360;
+                } else if (hue < 0) {
+                    hue = hue + 360 * Math.ceil((hue * -1) / 360);
+                }
+                
+                return hue;
+            },
+            correctValue = function (val) {
+                return Math.max(Math.min(parseFloat(val) || 0, 1), 0);
+            };
         
-        s_val = Math.max(Math.min(s_val, 1), 0);
-        l_val = Math.max(Math.min(l_val, 1), 0);
         
-        this.hue = function () {
+        this.hue = function (val) {
+            if (typeof val !== 'undefined') {
+                h_val = correctHue(val);
+                return this;
+            }
             return h_val;
         };
         
-        this.saturation = function () {
+        this.saturation = function (val) {
+            
+            if (typeof val !== 'undefined') {
+                s_val = correctValue(val);
+                return this;
+            }
             return s_val;
         };
         
-        this.lightness = function () {
+        this.lightness = function (val) {
+            if (typeof val !== 'undefined') {
+                l_val = correctValue(val);
+                return this;
+            }
             return l_val;
         };
+        
+        this.hue(h);
+        this.saturation(s);
+        this.lightness(l);
     };
     
     colorMe.HSL.prototype = {

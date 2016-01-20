@@ -24,16 +24,11 @@ var rgb = hex.getRGB(); //returns RGB object
 var hsl = hex.getHSL(); //returns HSL object
 rgb.getHSL(); //returns new HSL object
 hsl.getRGB(); //returns new RGB object
-
 rgb.red(255).green(255).blue(255).getHex(); //returns #FFFFFF
 hsl.hue(0).saturation(0).lightness(1).getHex(); //returns #FFFFFF
-
-
-
 rgb.red(); //255
 rgb.green(); //255
 rgb.blue(); //255
-
 hsl.hue(); //0
 hsl.saturation(); //0
 hsl.lightness(); //1

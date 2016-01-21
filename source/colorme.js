@@ -5,6 +5,7 @@ License: MIT
 */
 (function (root) {
     'use strict';
+
     var colorMe = {};
     
     colorMe.HexColor = function (hex) {
@@ -240,5 +241,6 @@ License: MIT
     };
     
     root.colorMe = colorMe;
+    
     
 }(this));

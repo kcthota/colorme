@@ -4,7 +4,7 @@ node_js:
 before_script:
   - npm install gulp
   - npm install phantomjs
-  - npm install gulp-jasmine-browser
+  - npm install gulp-jasmine
   - npm install gulp-uglify
   - npm install jshint gulp-jshint
   - npm install gulp-rename

@@ -1,3 +1,5 @@
+var colorMe = require('../source/colorme').colorMe;
+
 describe("ColorTests", function () {
   
     it("hex color in short format", function() {
